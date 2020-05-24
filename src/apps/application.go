@@ -18,6 +18,7 @@ func NewApplication(route *gin.Engine) *Application {
 	return &Application{Route: route}
 }
 
+// Create is method to create application
 func (a Application) Create() {
 	configureEndpoint(a.Route)
 }
@@ -32,9 +33,11 @@ func configureEndpoint(r *gin.Engine) {
 			"status":  http.StatusNotFound,
 			"message": "Route not found",
 			"data":    nil,
-			"errors": gin.H{
-				"flag":    "ROUTE_NOT_FOUND",
-				"message": "The route you are looking for is not found",
+			"errors": []map[string]interface{}{
+				gin.H{
+					"flag":    "ROUTE_NOT_FOUND",
+					"message": "The route you are looking for is not found",
+				},
 			},
 		})
 	})
